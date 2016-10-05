@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>UTS PWI 2015 / 2016</title>
+    <link href='css/bootstrap.min.css' rel='stylesheet'/>
+    <link href='css/highlight.min.css' rel='stylesheet'/>
+    <meta name='viewport' content='width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0'/>
+  </head>
+  <body>
+    <div class='container'>
+      <h2 class='page-header'>Nomer 1</h2>
+      <label>Jawaban (Sourcecode) :</label>
+<pre><code class='css'>th,thead{
+  text-transform:uppercase;
+  font-weight:bold;
+  background:red;
+}
+tr:nth-child(even){
+  background:green;
+}</code></pre>
+      <label>Penjelasan :</label>
+      <ol>
+        <li>
+          <code>th,thead</code>
+          <p>Selector untuk bagian header (<code>thead</code>) dan sel pada header (<code>th</code>).</p>
+        </li>
+        <li>
+          <code>text-transform: uppercase</code>
+          <p>Untuk membuat text menjadi uppercase (kapital)</p>
+        </li>
+        <li>
+          <code>font-weight: bold</code>
+          <p>Mengubah weight font, bisa bold, normal, dll atau bisa dalam bentuk angka. (200/500/700) dll</p>
+        </li>
+        <li>
+          <code>background: red</code>
+          <p>Mengganti warna background, bisa juga menggunakan <code>background-color</code>.</p>
+        </li>
+        <li>
+          <code>tr:nth-child(even)</code>
+          <p>Selector tiap <code>tr</code>(baris) pada tabel dengan urutan genap/<code>even</code>. Untuk ganjil menggunakan <code>odd</code>.</p>
+        </li>
+      </ol>
+
+
+      <h2 class='page-header'>Nomer 2</h2>
+      <label>Jawaban (Sourcecode) : </label>
+<pre><code class='html'>&lt;h2&gt;Member Register&lt;/h2&gt;
+&lt;form method='POST'&gt;
+  &lt;table&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Your Email&lt;/td&gt;
+        &lt;td&gt;: &lt;input name='email' oninvalid='peringatanSalah("Format Email tidak sesuai dan wajib diisi")' type='email' required placeholder='input your email'/&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Full Name&lt;/td&gt;
+        &lt;td&gt;: &lt;input name='email' oninvalid='peringatanSalah("Format Nama tidak sesuai dan wajib diisi")' type='text' required placeholder='Full name' pattern='[a-zA-Z ]+' maxlength='30'/&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Website&lt;/td&gt;
+        &lt;td&gt;: &lt;input name='website' oninvalid='peringatanSalah("Format Website tidak sesuai dan wajib diisi")' type='url' placeholder='http://' type='text' required pattern='https?://[a-zA-Z0-9.-]+\.[a-z]{2,5}'/&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Password&lt;/td&gt;
+        &lt;td&gt;: &lt;input type='password' oninvalid='peringatanSalah("Format Password tidak sesuai dan wajib diisi")' name='confirmPassword' placeholder='Enter your password' required pattern='[a-zA-Z0-9]{6,}'/&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Confirm Password&lt;/td&gt;
+        &lt;td&gt;: &lt;input type='password' oninvalid='peringatanSalah("Format Password tidak sesuai dan wajib diisi")' name='confirmPassword' placeholder='Re type your password' required pattern='[a-zA-Z0-9]{6,}'/&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;b id='captcha'&gt;&lt;/b&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Enter Captchay&lt;/td&gt;
+        &lt;td&gt;: &lt;input name='captcha' id='isiCaptcha' maxlength='4' required/&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td colspan='2'&gt;&lt;button type='submit' onclick='register()' name='submit'&gt;Register&lt;/button&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/form&gt;
+&lt;div id='peringatan'&gt;&lt;/div&gt;
+&lt;script&gt;
+
+  //Inisiasi karakter captcha [a-zA-Z0-9]
+  var karakter = "01234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  //Inisiasi captcha kosong dengan tipe String
+  var captcha = "";
+
+  //Mengisi captcha yang tadinya kosong ditambah dengan string dari karakter captcha paling atas (dengan random)
+  //charAt fungsi untuk mengambil karakter dari string
+  //Math.random() menghasilkan bilangan real random 0.xxxxx
+  for(i=1;i&lt;=4;i++){
+    captcha += karakter.charAt((Math.random()*100)%karakter.length);
+  }
+
+  //Mengambil element dengan id "captcha" kemudian diisi dengan captcha
+  document.getElementById("captcha").innerHTML = captcha;
+
+  //Cek apakah captcha yang diinput sama dengan captcha yang ditulis
+  function register(){
+    var isiCaptcha = document.getElementById("isiCaptcha").value;
+    if(isiCaptcha!=captcha){
+      peringatanSalah("Captcha Salah");
+    }
+  }
+
+  //Menampilkan peringatan
+  function peringatanSalah(a){
+    var tempatPeringatan = document.getElementById("peringatan");
+    alert(a); //Menggunakan Alert Pop Up
+    //tempatPeringatan.innerHTML += "&lt;p&gt;"+a+"&lt;/p&gt;"; //Menggunakan text peringatan di bawah
+  }
+&lt;/script&gt;</code></pre>
+
+      <label>Penjelasan HTML : </label>
+      <ol>
+        <li>
+          <code>oninvalid</code>
+          <p>Atribut ini digunakan apabila input tersebut tidak diisi dengan sesuai / valid, dan akan melakukan fungsi yang diinginkan.</p>
+        </li>
+        <li>
+          <code>required</code>
+          <p>Atribut ini digunakan untuk input yang wajib disii.</p>
+        </li>
+        <li>
+          <code>type</code>
+          <p>Atribut ini digunakan untuk menentukan tipe yang dapat dimasukkan pada input. Pada jawaban di atas menggunakan url, email, password dan text.</p>
+        </li>
+        <li>
+          <code>pattern</code>
+          <p>Atribut ini digunakan untuk menentukan karakter apa saja yang dapat dimasukkan pada input.</p>
+          <ul>
+            <li><code>[a-zA-Z ]+</code> : Karakter a-z, A-Z, dan karakter spasi.</li>
+            <li><code>https?://[a-zA-Z0-9.-]+\.[a-z]{2,5}</code> : String berawal "http://" atau "https://"; kemudian karakter a-z,A-Z,0-9,strip, dan titik;
+              kemudian karakter titik ditambah dengan karakter [a-z] minimal 2 sampai 5 karakter.</li>
+            <li><code>[a-zA-Z0-9]{6,}</code> : Karakter a-z,A-Z,0-9 minimal 6 karakter</li>
+          </ul>
+        </li>
+        <li>
+          <code>onclick</code>
+          <p>Berisi fungsi yang akan dieksekusi apabila element tersebut diklik.</p>
+        </li>
+      </ol>
+
+      <h2 class='page-header'>Nomer 3</h2>
+      <label>Sourcecode : </label>
+<pre><code class='javascript'>var Circle = Object.inherit({
+  initialize: function(radius){
+    this.radius = radius;
+  },
+  area: function(){
+    return Math.PI * this.radius * this.radius;
+  },
+  circumference: function(){
+    return 2 * Math.PI * this.radius;
+  }
+});
+
+var c = Circle.create(10);
+alert(c.area());
+alert(c.circumference());
+</code></pre>
+
+      <label>Jawaban dan Penjelasan</label>
+      <ol>
+        <li>
+          <code>var c = Circle.create(10);</code>
+          <p>Membuat objek Circle dengan mengisi radius 10</p>
+        </li>
+        <li>
+          <code>alert(c.area());</code>
+          <p>Menampilkan peringatan yang berisi kembalian nilai dari fungsi <code>area</code>. Dengan fungsi area mengembalikan nilai
+          Math.PI * this.radius * this.radius. Dengan radius yang sudah diinisiasi di awal (10). Silahkan dihitung sendiri hehe</p>
+        </li>
+        <li>
+          <code>alert(c.circumference());</code>
+          <p>Sama seperti nomer 2</p>
+        </li>
+      </ol>
+
+    </div>
+
+    <script src='js/highlight.min.js'></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

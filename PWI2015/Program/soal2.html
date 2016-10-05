@@ -1,0 +1,60 @@
+<h2>Member Register</h2>
+<form method='POST'>
+  <table>
+    <tbody>
+      <tr>
+        <td>Your Email</td>
+        <td>: <input name='email' oninvalid='peringatanSalah("Format Email tidak sesuai dan wajib diisi")' type='email' required placeholder='input your email'/></td>
+      </tr>
+      <tr>
+        <td>Full Name</td>
+        <td>: <input name='email' oninvalid='peringatanSalah("Format Nama tidak sesuai dan wajib diisi")' type='text' required placeholder='Full name' pattern='[a-zA-Z ]+' maxlength='30'/></td>
+      </tr>
+      <tr>
+        <td>Website</td>
+        <td>: <input name='website' oninvalid='peringatanSalah("Format Website tidak sesuai dan wajib diisi")' type='url' placeholder='http://' type='text' required pattern='https?://[a-zA-Z0-9.-]+\.[a-z]{2,5}'/></td>
+      </tr>
+      <tr>
+        <td>Password</td>
+        <td>: <input type='password' oninvalid='peringatanSalah("Format Password tidak sesuai dan wajib diisi")' name='confirmPassword' placeholder='Enter your password' required pattern='[a-zA-Z0-9]{6,}'/></td>
+      </tr>
+      <tr>
+        <td>Confirm Password</td>
+        <td>: <input type='password' oninvalid='peringatanSalah("Format Password tidak sesuai dan wajib diisi")' name='confirmPassword' placeholder='Re type your password' required pattern='[a-zA-Z0-9]{6,}'/></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><b id='captcha'></b></td>
+      </tr>
+      <tr>
+        <td>Enter Captchay</td>
+        <td>: <input name='captcha' id='isiCaptcha' maxlength='4' required/></td>
+      </tr>
+      <tr>
+        <td colspan='2'><button type='submit' onclick='register()' name='submit'>Register</button></td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+<div id='peringatan'></div>
+<script>
+  var karakter = "01234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var captcha = "";
+  for(i=1;i<=4;i++){
+    captcha += karakter.charAt((Math.random()*100)%karakter.length);
+  }
+  document.getElementById("captcha").innerHTML = captcha;
+
+  function register(){
+    var isiCaptcha = document.getElementById("isiCaptcha").value;
+    if(isiCaptcha!=captcha){
+      peringatanSalah("Captcha Salah");
+    }
+  }
+
+  function peringatanSalah(a){
+    var tempatPeringatan = document.getElementById("peringatan");
+    alert(a); //Menggunakan Alert Pop Up
+    //tempatPeringatan.innerHTML += "<p>"+a+"</p>"; //Menggunakan text peringatan di bawah
+  }
+</script>
